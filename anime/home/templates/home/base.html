@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top" id="navbar-bg">
+        <div class="container">
+            
+            <a class="navbar-brand fw-bold text-uppercase" href="{% url 'home:index' %}">Hi!Anime</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'home:index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:login' %}">Login</a>
+                    </li>
+                    {% endif %}
+
+                    <li class="nav-item dropdown">
+                        {% if user.is_authenticated %}
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ user.username }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="profile">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'users:logout' %}">Logout</a></li>
+                        </ul>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'users:signup' %}">Create account</a>
+                        </li>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block mainbody %}
+    {% endblock %}
+
+    <footer class="bg-dark text-white pt-4 pb-3 mt-auto">
+        <div class="container text-center text-md-start">
+            <div class="row">
+                
+                <div class="col-md-3 mb-3">
+                    <h5 class="text-uppercase">Hi!Anime</h5>
+                    <p>Hi!Anime does not store any files on our server, we only linked to the media which is hosted on 3rd party services.</p>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <h5 class="text-uppercase fw-bold">Links</h5>
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
+                    <p><a class="text-white text-decoration-none" href="https://github.com/Shrivastava-1">Github</a></p>
+                    <p><a class="text-white text-decoration-none" href="https://www.linkedin.com/in/chitranshh1/">LinkedIn</a></p>
+                    <p><a class="text-white text-decoration-none" href="https://github.com/Shrivastava-1">Portfolio</a></p>
+                    <p><a class="text-white text-decoration-none" href="https://www.facebook.com/Cshrivastava.1/">Facebook</a></p>
+                    <p><a class="text-white text-decoration-none" href="https://www.instagram.com/chitranshshrivastava1/">Instagram</a></p>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <h5 class="text-uppercase fw-bold">Products</h5>
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
+                    <p>Python</p>
+                    <p>Django</p>
+                    <p>Html</p>
+                    <p>CSS</p>
+                    <p>Github</p>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <h5 class="text-uppercase fw-bold">Contacts</h5>
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
+                    <p>Madhya Pradesh, Ujjain 456006, INDIA</p>
+                    <p>chitranshshrivastava102@gmail.com </p>
+                    <p>Phone: +91 7879294846</p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-3 border-top pt-2">
+            <small>&copy; 2025 Hi!Anime. All rights reserved.</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+</body>
+</html>
